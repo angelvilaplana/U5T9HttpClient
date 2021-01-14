@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">U5T9HttpClient</string>
+    <string name="et_place_hint">Type a place to search</string>
+    <string name="bt_search">Search Wikipedia</string>
+</resources>
