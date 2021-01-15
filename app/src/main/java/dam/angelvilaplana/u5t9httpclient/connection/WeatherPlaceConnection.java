@@ -34,7 +34,6 @@ public class WeatherPlaceConnection extends Connection {
                     .appendQueryParameter("appid", appid);
 
             return new URL(builder.build().toString());
-            // startBackgroundWeatherTask(url);
         } catch (MalformedURLException e) {
             Log.i("URL", e.getMessage());
             return null;
@@ -51,13 +50,16 @@ public class WeatherPlaceConnection extends Connection {
             // Create JSON object from result stream
             JSONObject json = new JSONObject(resultStream);
 
+            // Get the coordinates
             JSONObject coord = (JSONObject) json.get("coord");
             double lat = coord.getDouble("lat");
             double lon = coord.getDouble("lon");
 
+            // Get the weather
             JSONArray weather = json.getJSONArray("weather");
             String description = weather.getJSONObject(0).getString("description");
 
+            // Get the temperature & the humidity
             JSONObject main = (JSONObject) json.get("main");
             double temp = main.getDouble("temp");
             int humidity = main.getInt("humidity");

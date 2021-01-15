@@ -105,6 +105,8 @@ public class BackgroundTask {
     }
 
     public void startBackgroundWeatherTask(final int position) {
+        progressBar.setVisibility(View.VISIBLE);
+
         executor = Executors.newSingleThreadExecutor();
         final Handler handler = new Handler(Looper.getMainLooper());
 
@@ -115,15 +117,16 @@ public class BackgroundTask {
                 mainConnection.getWeatherPlaceConnection().runConnection(url);
                 final int resultData =  mainConnection.getWeatherPlaceConnection().getResultData();
 
-                if (resultData == Connection.FOUND_JSON || resultData == Connection.NO_FOUND_JSON) {
-                    weatherPlaceArray[position] = mainConnection.getWeatherPlaceConnection().getWeatherPlace();
-                }
-
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (weatherPlaceArray[position] != null) {
+                        progressBar.setVisibility(View.GONE);
+
+                        if (resultData == Connection.FOUND_JSON) {
+                            weatherPlaceArray[position] = mainConnection.getWeatherPlaceConnection().getWeatherPlace();
                             Toast.makeText(context, weatherPlaceArray[position].toString(), Toast.LENGTH_LONG).show();
+                        } else if (resultData == Connection.NO_FOUND_JSON) {
+                            Toast.makeText(context, "No information found at geonames", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(
                                     context,
