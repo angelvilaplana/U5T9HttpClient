@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setUI(savedInstanceState);
 
+        // TODO Activity 3 - Lifecycle update data when rotate screen
         backgroundTask = new BackgroundTask(this, mainConnection, lvSearchResult, progressBar);
         if (savedInstanceState != null) {
             backgroundTask.updateAdapter(savedInstanceState);
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    // TODO Activity 3 - Lifecycle shutdown ExecutorService
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -130,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+        // TODO Activity 1 - Add WeatherPlace API
         WeatherPlace weatherPlace = backgroundTask.getWeatherPlaceArray()[position];
         if (weatherPlace == null) {
             backgroundTask.startBackgroundWeatherTask(position);
