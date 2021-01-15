@@ -31,7 +31,6 @@ public class GeonamesPlaceConnection extends Connection {
         try {
             // url = new URL(URL_GEONAMES + "?q=" + place + "&maxRows=" + ROWS + "&userName=" + USER_NAME);
             // Use better a builder to avoid a malformed query string
-            // TODO Activity 1 - Edit search, create GeonamesPlace object & hide keyboard
             Uri.Builder builder = new Uri.Builder();
             builder.scheme("http")
                     .authority("api.geonames.org")
